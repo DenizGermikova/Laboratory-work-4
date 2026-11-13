@@ -1,0 +1,149 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Схема даних навчального застосунку",
+  "description": "Фізична схема даних для вивчення іноземних слів і словосполучень за допомогою Flash-карток та AR-маркерів.",
+  "type": "object",
+  "properties": {
+    "flashCards": {
+      "type": "array",
+      "description": "Колекція навчальних Flash-карток.",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Текст навчальної картки.",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "foreignWords": {
+            "type": "array",
+            "description": "Іноземні слова на картці.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "word": {
+                  "type": "string",
+                  "description": "Іноземне слово.",
+                  "minLength": 1,
+                  "maxLength": 100,
+                  "pattern": "^\\S(?:.*\\S)?$"
+                },
+                "translations": {
+                  "type": "array",
+                  "description": "Переклади іноземного слова.",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "description": "Значення перекладу.",
+                        "minLength": 1,
+                        "maxLength": 200
+                      }
+                    },
+                    "required": ["value"]
+                  }
+                },
+                "audio": {
+                  "type": "array",
+                  "description": "Аудіозаписи вимови слова.",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "format": "uri",
+                    "maxLength": 2048
+                  }
+                },
+                "arMarker": {
+                  "type": "object",
+                  "description": "AR-маркер, пов'язаний зі словом.",
+                  "properties": {
+                    "image": {
+                      "type": "string",
+                      "format": "uri",
+                      "maxLength": 2048
+                    }
+                  },
+                  "required": ["image"]
+                }
+              },
+              "required": [
+                "word",
+                "translations",
+                "audio",
+                "arMarker"
+              ]
+            }
+          },
+          "phrases": {
+            "type": "array",
+            "description": "Словосполучення для вивчення.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "Текст словосполучення.",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "pattern": "^\\S(?:.*\\S)?$"
+                },
+                "translations": {
+                  "type": "array",
+                  "description": "Переклади словосполучення.",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "value": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 200
+                      }
+                    },
+                    "required": ["value"]
+                  }
+                },
+                "audio": {
+                  "type": "array",
+                  "description": "Аудіозаписи вимови словосполучення.",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "format": "uri",
+                    "maxLength": 2048
+                  }
+                },
+                "arMarker": {
+                  "type": "object",
+                  "description": "AR-маркер, пов'язаний зі словосполученням.",
+                  "properties": {
+                    "image": {
+                      "type": "string",
+                      "format": "uri",
+                      "maxLength": 2048
+                    }
+                  },
+                  "required": ["image"]
+                }
+              },
+              "required": [
+                "text",
+                "translations",
+                "audio",
+                "arMarker"
+              ]
+            }
+          }
+        },
+        "required": ["text"]
+      }
+    }
+  },
+  "required": ["flashCards"]
+}
+
