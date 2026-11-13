@@ -1,0 +1,37 @@
+name: Data Schema Code Convention
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  DataSchemaValidation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install JSON Schema Validator
+        run: pip install jsonschema
+
+      - name: Validate Data Schema
+        run: |
+          python - <<'PY'
+          import json
+          from jsonschema.validators import validator_for
+
+          with open("DataSchema.json", encoding="utf-8") as f:
+              schema = json.load(f)
+
+          Validator = validator_for(schema)
+          Validator.check_schema(schema)
+
+          print("DataSchema.json is valid!")
+          PY
