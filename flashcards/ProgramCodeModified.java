@@ -1,3 +1,5 @@
+package flashcards;
+
 /**
  * Displays the name of the FlashCards AR application.
  */
