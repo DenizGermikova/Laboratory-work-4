@@ -23,5 +23,6 @@ jobs:
         env:
           VALIDATE_JAVA: true
           VALIDATE_ALL_CODEBASE: true
-          FILTER_REGEX_INCLUDE: '.*ProgramCode\.java$'
+          
+          FILTER_REGEX_INCLUDE: '.*ProgramCodeModified\.java$'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
