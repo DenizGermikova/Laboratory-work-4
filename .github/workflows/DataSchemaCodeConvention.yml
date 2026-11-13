@@ -27,11 +27,11 @@ jobs:
           import json
           from jsonschema.validators import validator_for
 
-          with open("DataSchema.json", encoding="utf-8") as f:
+          with open("DataSchemaModified.json", encoding="utf-8") as f:
               schema = json.load(f)
 
           Validator = validator_for(schema)
           Validator.check_schema(schema)
 
-          print("DataSchema.json is valid!")
+          print("DataSchemaModified.json is valid!")
           PY
